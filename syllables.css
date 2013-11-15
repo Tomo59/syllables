@@ -5,10 +5,22 @@
 }
 
 .syllable {
-    font-size: 1.5em;
     padding: 0.3em;
     border-style: solid;
     cursor: default;
     float: left;
     width: auto;
+}
+
+#footer
+{
+    font-size: 0.8em;
+    clear: both;
+    text-align: center;
+    vertical-align: middle;
+    line-height: normal;
+    margin: 0;
+    position: fixed;
+    bottom: 0px;
+    width: 100%;
 }
