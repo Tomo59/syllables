@@ -2,16 +2,40 @@
 function get_selection()
 {
     var html = "";
-    var color_list = [ "red", "blue", "green", "yellow" ];
+    var color_list = [ "red", "blue", "orange", "green", "purple" ];
 
     if (typeof window.getSelection != "undefined") {
         var sel = window.getSelection();
         if (sel.rangeCount) {
             var container = document.createElement("div");
-            for (var i = 0, len = sel.rangeCount; i < len; ++i) {
-                container.appendChild(sel.getRangeAt(i).cloneContents());
-            }
+            if (sel.rangeCount != 1)
+                console.log("Warning : multiple selections not supported");
+
+            range = sel.getRangeAt(0);
+
+            // get text under selection
+            container.appendChild(range.cloneContents());
             html = container.innerHTML;
+
+            // Change color of text
+            if (range.startOffset != range.endOffset)
+            {
+                document.designMode = "on";
+                sel.removeAllRanges();
+                sel.addRange(range);
+                // Use HiliteColor since some browsers apply BackColor to the whole block
+                if (!document.execCommand("HiliteColor", false, color_list[window.color_counter])) {
+                    document.execCommand("BackColor", false, color_list[window.color_counter]);
+                }
+                document.designMode = "off";
+            }
+
+            // remove selection
+            if (sel.empty) {  // Chrome
+                sel.empty();
+            } else if (sel.removeAllRanges) {  // Firefox
+                sel.removeAllRanges();
+            }
         }
     } else if (typeof document.selection != "undefined") {
         if (document.selection.type == "Text") {
@@ -24,11 +48,8 @@ function get_selection()
 
     var div = document.createElement("div");
     div.innerHTML = html;
-    $(div).css("border-style", "solid");
+    $(div).addClass("syllable");
     $(div).css("color", color_list[window.color_counter]);
-    $(div).css("cursor", "default");
-    $(div).css("float", "left");
-    $(div).css("width", "auto");
     $(div).draggable();
     $('body').append(div);
 
