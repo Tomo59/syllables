@@ -30,12 +30,12 @@ function get_selection()
                 document.designMode = "off";
             }
 
-            // remove selection
-            if (sel.empty) {  // Chrome
-                sel.empty();
-            } else if (sel.removeAllRanges) {  // Firefox
-                sel.removeAllRanges();
-            }
+            // // remove selection
+            // if (sel.empty) {  // Chrome
+            //     sel.empty();
+            // } else if (sel.removeAllRanges) {  // Firefox
+            //     sel.removeAllRanges();
+            // }
         }
     } else if (typeof document.selection != "undefined") {
         if (document.selection.type == "Text") {
