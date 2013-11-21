@@ -2,7 +2,7 @@
 function get_selection()
 {
     var html = "";
-    var color_list = [ "red", "blue", "orange", "green", "purple" ];
+    var color_list = [ "Red", "DodgerBlue", "Orange", "LimeGreen", "DarkSalmon", "MediumOrchid" ];
 
     if (typeof window.getSelection != "undefined") {
         var sel = window.getSelection();
